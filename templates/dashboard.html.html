@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>SafeSurf Parent Dashboard</title>
+  <link rel="stylesheet" href="dashboard.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+<h1>📊 SafeSurf Parent Dashboard</h1>
+
+<h2>SafeSurf – Parent Dashboard</h2>
+
+<button id="logout">Logout</button>
+
+<table border="1" cellpadding="8" style="margin-top:20px;">
+  <thead>
+    <tr>
+      <th>URL</th>
+      <th>Risk Score</th>
+      <th>Time</th>
+    </tr>
+  </thead>
+  <tbody id="activityTable"></tbody>
+</table>
+
+<script src="dashboard.js"></script>
+
+<canvas id="riskChart" height="120"></canvas>
+
+<script src="dashboard.js"></script>
+</body>
+</html>

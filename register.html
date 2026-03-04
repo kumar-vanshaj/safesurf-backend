@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>SafeSurf – Parent Registration</title>
+</head>
+<body>
+
+<h2>Create Parent Account</h2>
+
+<form id="registerForm">
+  <input id="email" type="email" placeholder="Email" required />
+  <br><br>
+  <input id="password" type="password" placeholder="Password" required />
+  <br><br>
+  <button type="submit">Register</button>
+</form>
+
+<p id="status"></p>
+
+<script>
+document.getElementById("registerForm").addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  const email = document.getElementById("email").value;
+  const password = document.getElementById("password").value;
+
+  const res = await fetch("http://127.0.0.1:5000/register", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ email, password })
+  });
+
+  const data = await res.json();
+
+  if (res.status === 201) {
+    document.getElementById("status").innerText =
+      "Account created. You can now login.";
+    setTimeout(() => {
+      window.location.href = "/";
+    }, 1500);
+  } else {
+    document.getElementById("status").innerText =
+      data.error || "Registration failed";
+  }
+});
+</script>
+
+</body>
+</html>
