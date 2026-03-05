@@ -63,7 +63,19 @@ def get_activities():
 
     return jsonify(rows)
 
+def increment_pages():
+    conn = get_db()
+    conn.execute("UPDATE stats SET pages_analyzed = pages_analyzed + 1 WHERE id = 1")
+    conn.commit()
 
+def increment_blocked():
+    conn = get_db()
+    conn.execute("UPDATE stats SET blocked_pages = blocked_pages + 1 WHERE id = 1")
+    conn.commit()
+increment_pages()
+
+if harmful:
+    increment_blocked()
     
 @app.route("/parent/activities", methods=["GET"])
 @jwt_required()
@@ -128,6 +140,19 @@ def login_page():
 def dashboard_page():
     return render_template("dashboard.html")
 
+
+@app.route("/stats")
+def stats():
+    conn = get_db()
+    row = conn.execute("SELECT * FROM stats WHERE id=1").fetchone()
+
+    users = conn.execute("SELECT COUNT(*) FROM users").fetchone()[0]
+
+    return {
+        "pages_analyzed": row["pages_analyzed"],
+        "blocked_pages": row["blocked_pages"],
+        "registered_users": users
+    }
 
 
 if __name__ == "__main__":
