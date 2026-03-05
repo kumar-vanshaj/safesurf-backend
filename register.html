@@ -35,9 +35,7 @@ document.getElementById("registerForm").addEventListener("submit", async (e) => 
   if (res.status === 201) {
     document.getElementById("status").innerText =
       "Account created. You can now login.";
-    setTimeout(() => {
-      window.location.href = "https://safesurf-backend.onrender.com/login";
-    }, 1500);
+    
   } else {
     document.getElementById("status").innerText =
       data.error || "Registration failed";
