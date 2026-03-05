@@ -10,7 +10,7 @@ def get_db():
         _conn = sqlite3.connect(
             "safesurf.db",
             check_same_thread=False,
-            isolation_level=None  # 🔥 AUTOCOMMIT MODE
+            isolation_level=None  # autocommit
         )
     return _conn
 
@@ -29,7 +29,6 @@ def init_db():
         password TEXT
     )
     """)
-    
 
     cur.execute("""
     CREATE TABLE IF NOT EXISTS activities (
@@ -41,12 +40,18 @@ def init_db():
         timestamp DATETIME DEFAULT CURRENT_TIMESTAMP
     )
     """)
-    cur.execute("""
-CREATE TABLE IF NOT EXISTS stats (
-    id INTEGER PRIMARY KEY,
-    pages_analyzed INTEGER DEFAULT 0,
-    blocked_pages INTEGER DEFAULT 0
-)
-""")
 
-cur.execute("INSERT OR IGNORE INTO stats (id, pages_analyzed, blocked_pages) VALUES (1,0,0)")
+    cur.execute("""
+    CREATE TABLE IF NOT EXISTS stats (
+        id INTEGER PRIMARY KEY,
+        pages_analyzed INTEGER DEFAULT 0,
+        blocked_pages INTEGER DEFAULT 0
+    )
+    """)
+
+    cur.execute("""
+    INSERT OR IGNORE INTO stats (id, pages_analyzed, blocked_pages)
+    VALUES (1,0,0)
+    """)
+
+    conn.commit()
