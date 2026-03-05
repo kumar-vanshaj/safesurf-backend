@@ -5,7 +5,7 @@ if (!token) {
   window.location.href = "/";
 }
 
-fetch("http://127.0.0.1:5000/activities", {
+fetch("https://safesurf-backend.onrender.com/activities", {
   headers: {
     "Authorization": "Bearer " + token
   }
