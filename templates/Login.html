@@ -22,7 +22,7 @@ document.getElementById("loginForm").addEventListener("submit", async (e) => {
   const email = document.getElementById("email").value;
   const password = document.getElementById("password").value;
 
-  const res = await fetch("http://127.0.0.1:5000/login", {
+  const res = await fetch("https://safesurf-backend.onrender.com/login", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ email, password })
@@ -32,7 +32,7 @@ document.getElementById("loginForm").addEventListener("submit", async (e) => {
 
   if (data.access_token) {
     localStorage.setItem("jwt", data.access_token);
-    window.location.href = "http://127.0.0.1:5000/dashboard/index.html";
+    window.location.href = "https://safesurf-backend.onrender.com/dashboard/index.html";
 
   } else {
     alert("Login failed");
